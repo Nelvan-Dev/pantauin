@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐷 Pantauin — Tracker Pengeluaran
 
-## Getting Started
+Aplikasi pencatatan pemasukan dan pengeluaran harian. Dibangun dengan **Next.js**, **Tailwind CSS**, dan **Recharts**.
 
-First, run the development server:
+## ✨ Fitur
+
+| Fitur | Status |
+|-------|--------|
+| Catat pemasukan & pengeluaran | ✅ |
+| 8 kategori pengeluaran + 4 kategori pemasukan | ✅ |
+| Pilih tanggal transaksi | ✅ |
+| Filter per bulan & tipe | ✅ |
+| Cari transaksi | ✅ |
+| Edit & hapus transaksi | ✅ |
+| Budget bulanan dengan progress bar | ✅ |
+| Grafik pengeluaran harian (bar chart) | ✅ |
+| Pie chart per kategori | ✅ |
+| Rincian total per kategori | ✅ |
+| Ekspor CSV | ✅ |
+| Mode gelap/terang | ✅ |
+| Tema biru midnight & biru keunguan | ✅ |
+| Data tersimpan di localStorage | ✅ |
+
+## 🚀 Cara Jalanin
 
 ```bash
+cd pantauin
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🖥️ Tampilan
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **☀️ Siang:** Biru soft (#f0f2f5), card putih, aksen navy (#4a5580)
+- **🌙 Malam:** Biru midnight (#0f111a), card biru gelap (#1a1d2e), aksen biru keunguan (#6a78a8)
 
-## Learn More
+## 📦 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js** — Framework React
+- **Tailwind CSS** — Styling
+- **Recharts** — Grafik dan chart
+- **Lucide React** — Ikon
+- **localStorage** — Penyimpanan data
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 Lisensi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
