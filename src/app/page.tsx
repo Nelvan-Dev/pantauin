@@ -21,10 +21,10 @@ const KATEGORI: Record<Tipe, string[]> = {
 };
 
 const WARNA_KATEGORI: Record<string, string> = {
-  Makan: '#5a5a40', Transport: '#7a7a5a', Belanja: '#c4a882',
-  Tagihan: '#2d2a26', Hiburan: '#8a8580', Kesehatan: '#a8a078',
-  Pendidikan: '#6b6b4e', Lainnya: '#b8b2a8',
-  Gaji: '#2e7d32', Freelance: '#1b5e20', Investasi: '#0d3b11', Hadiah: '#4caf50',
+  Makan: '#4a5580', Transport: '#6a78a8', Belanja: '#8895c0',
+  Tagihan: '#3b4470', Hiburan: '#58669c', Kesehatan: '#7a86b0',
+  Pendidikan: '#2c3560', Lainnya: '#95a0c0',
+  Gaji: '#2d7d6a', Freelance: '#3da88a', Investasi: '#1b5e50', Hadiah: '#5abfa0',
 };
 
 function formatRupiah(n: number) {
