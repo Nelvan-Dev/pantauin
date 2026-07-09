@@ -173,10 +173,10 @@ export default function Home() {
           <div className="bg-bg-card border border-border rounded-2xl p-5 shadow-sm">
             <h3 className="text-xs font-mono font-bold uppercase mb-3 text-text-secondary">Pengeluaran Harian</h3>
             <ResponsiveContainer width="100%" height={150}>
-              <BarChart data={dailyData}>
+              <BarChart data={dailyData} style={{ background: 'transparent', backgroundColor: 'transparent' }}>
                 <XAxis dataKey="tanggal" tick={{ fontSize: 10, fill: gelap ? '#9c9790' : '#78716c' }} tickFormatter={(v: any) => v.slice(8)} />
                 <YAxis tick={{ fontSize: 10, fill: gelap ? '#9c9790' : '#78716c' }} tickFormatter={(v: any) => (v / 1000).toFixed(0) + 'k'} />
-                <Tooltip formatter={(v: any) => formatRupiah(Number(v))} contentStyle={{ background: 'transparent', border: 'none', boxShadow: 'none' }} />
+                <Tooltip formatter={(v: any) => formatRupiah(Number(v))} />
                 <Bar dataKey="pengeluaran" fill="#6a78a8" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -188,11 +188,11 @@ export default function Home() {
             <div className="bg-bg-card border border-border rounded-2xl p-5 shadow-sm">
               <h3 className="text-xs font-mono font-bold uppercase mb-3 text-text-secondary">Per Kategori</h3>
               <ResponsiveContainer width="100%" height={200}>
-                <PieChart>
+                <PieChart style={{ background: 'transparent', backgroundColor: 'transparent' }}>
                   <Pie data={chartData} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: any) => `${name} ${((percent || 0) * 100).toFixed(0)}%`} labelLine={false}>
                     {chartData.map((e: any, i: number) => <Cell key={i} fill={WARNA_KATEGORI[e.name] || '#b8b2a8'} />)}
                   </Pie>
-                  <Tooltip formatter={(v: any) => formatRupiah(Number(v))} contentStyle={{ background: 'transparent', border: 'none', boxShadow: 'none' }} />
+                  <Tooltip formatter={(v: any) => formatRupiah(Number(v))} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
