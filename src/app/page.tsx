@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { Plus, Trash2, Download, Wallet, TrendingUp, TrendingDown, PiggyBank, Camera } from 'lucide-react';
+import { Plus, Trash2, Download, Wallet, TrendingUp, TrendingDown, PiggyBank } from 'lucide-react';
 
 type Tipe = 'pemasukan' | 'pengeluaran';
 
@@ -34,8 +34,6 @@ function formatRupiah(n: number) {
 export default function Home() {
   const [transaksi, setTransaksi] = useState<Transaksi[]>([]);
   const [bukaTambah, setBukaTambah] = useState(false);
-  const [scanStruk, setScanStruk] = useState(false);
-  const [scanLoading, setScanLoading] = useState(false);
   const [filterTipe, setFilterTipe] = useState<Tipe | 'semua'>('semua');
   const [filterBulan, setFilterBulan] = useState(() => new Date().toISOString().slice(0, 7));
 
@@ -104,7 +102,7 @@ export default function Home() {
       </header>
 
       <main className="max-w-5xl mx-auto p-4 md:p-6 space-y-4">
-        {/* Saldo Cards */}
+        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[{ label: 'SALDO', value: saldo, icon: Wallet, color: saldo >= 0 ? 'text-income' : 'text-expense' },
             { label: 'PEMASUKAN', value: totalPemasukan, icon: TrendingUp, color: 'text-income' },
@@ -125,8 +123,8 @@ export default function Home() {
             <h3 className="text-xs font-mono font-bold text-muted uppercase mb-3">Pengeluaran Harian</h3>
             <ResponsiveContainer width="100%" height={180}>
               <BarChart data={dailyData}>
-                <XAxis dataKey="tanggal" tick={{ fontSize: 10 }} tickFormatter={(v) => v.slice(8)} />
-                <YAxis tick={{ fontSize: 10 }} tickFormatter={(v) => (v / 1000).toFixed(0) + 'k'} />
+                <XAxis dataKey="tanggal" tick={{ fontSize: 10 }} tickFormatter={(v: any) => v.slice(8)} />
+                <YAxis tick={{ fontSize: 10 }} tickFormatter={(v: any) => (v / 1000).toFixed(0) + 'k'} />
                 <Tooltip formatter={(v: any) => formatRupiah(Number(v))} />
                 <Bar dataKey="pengeluaran" fill="#5a5a40" radius={[4, 4, 0, 0]} />
               </BarChart>
@@ -140,7 +138,7 @@ export default function Home() {
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie data={chartData} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: any) => `${name} ${((percent || 0) * 100).toFixed(0)}%`} labelLine={false}>
-                  {chartData.map((e, i) => <Cell key={i} fill={WARNA_KATEGORI[e.name] || '#b8b2a8'} />)}
+                  {chartData.map((e: any, i: number) => <Cell key={i} fill={WARNA_KATEGORI[e.name] || '#b8b2a8'} />)}
                 </Pie>
                 <Tooltip formatter={(v: any) => formatRupiah(Number(v))} />
               </PieChart>
@@ -148,7 +146,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* Filter + Tambah */}
+        {/* Filter + Add */}
         <div className="flex flex-wrap items-center gap-3">
           <input type="month" value={filterBulan} onChange={(e) => setFilterBulan(e.target.value)} className="text-sm border border-border rounded-xl px-3 py-2 bg-white" />
           <select value={filterTipe} onChange={(e) => setFilterTipe(e.target.value as any)} className="text-sm border border-border rounded-xl px-3 py-2 bg-white">
@@ -156,17 +154,12 @@ export default function Home() {
             <option value="pemasukan">Pemasukan</option>
             <option value="pengeluaran">Pengeluaran</option>
           </select>
-          <div className="flex gap-2 ml-auto">
-            <button onClick={() => setScanStruk(true)} className="flex items-center gap-1.5 text-sm border border-sage text-sage px-4 py-2 rounded-xl hover:bg-sage-pale/50 transition-colors">
-              <Camera className="w-4 h-4" /> Scan Struk
-            </button>
-            <button onClick={() => setBukaTambah(true)} className="flex items-center gap-1.5 text-sm bg-sage text-white px-4 py-2 rounded-xl hover:bg-sage-light transition-colors">
-              <Plus className="w-4 h-4" /> Tambah
-            </button>
-          </div>
+          <button onClick={() => setBukaTambah(true)} className="flex items-center gap-1.5 text-sm bg-sage text-white px-4 py-2 rounded-xl hover:bg-sage-light transition-colors ml-auto">
+            <Plus className="w-4 h-4" /> Tambah
+          </button>
         </div>
 
-        {/* Daftar Transaksi */}
+        {/* Transactions List */}
         <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
           {filtered.length === 0 ? (
             <div className="p-10 text-center text-muted">
@@ -202,52 +195,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Modal Scan Struk */}
-      {scanStruk && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4" onClick={() => { setScanStruk(false); setScanLoading(false); }}>
-          <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-xl" onClick={(e) => e.stopPropagation()}>
-            <h2 className="font-bold text-lg text-charcoal mb-2">Scan Struk</h2>
-            <p className="text-xs text-muted mb-5">Foto struk belanja, otomatis baca total + kategori</p>
-
-            <label className={`border-2 border-dashed rounded-2xl p-8 text-center block cursor-pointer transition-all ${scanLoading ? 'opacity-50' : 'hover:border-sage'}`}>
-              <Camera className="w-10 h-10 text-muted mx-auto mb-2" />
-              <p className="text-sm font-medium text-charcoal">Upload foto struk</p>
-              <p className="text-xs text-muted mt-1">PNG atau JPG</p>
-              <input type="file" accept="image/*" capture="environment" className="hidden" disabled={scanLoading}
-                onChange={async (e) => {
-                  const f = e.target.files?.[0];
-                  if (!f) return;
-                  setScanLoading(true);
-                  const form = new FormData();
-                  form.append('file', f);
-                  try {
-                    const res = await fetch('/api/scan-struk', { method: 'POST', body: form });
-                    const data = await res.json();
-                    if (data.fallback || data.error) {
-                      alert('Struk gak terbaca. Isi manual aja.');
-                      setScanStruk(false);
-                      setBukaTambah(true);
-                    } else {
-                      setFormKategori(data.kategori || 'Lainnya');
-                      setFormJumlah(String(data.total));
-                      setFormCatatan(data.item || '');
-                      setFormTipe('pengeluaran');
-                      setScanStruk(false);
-                      setBukaTambah(true);
-                    }
-                  } catch { alert('Gagal scan. Coba manual.'); }
-                  setScanLoading(false);
-                }}
-              />
-            </label>
-
-            {scanLoading && <p className="text-center text-sm text-muted mt-3">Memproses struk...</p>}
-            <button onClick={() => { setScanStruk(false); setScanLoading(false); }} className="w-full mt-4 py-2.5 border border-border rounded-xl text-sm text-charcoal hover:bg-cream">Batal</button>
-          </div>
-        </div>
-      )}
-
-      {/* Modal Tambah */}
+      {/* Modal Add Transaction */}
       {bukaTambah && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4" onClick={() => setBukaTambah(false)}>
           <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-xl" onClick={(e) => e.stopPropagation()}>
