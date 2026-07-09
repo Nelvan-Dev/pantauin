@@ -31,6 +31,8 @@ npm run dev
 
 Buka `http://localhost:3000`
 
+🔗 **Live Demo:** [pantauin-nu.vercel.app](https://pantauin-nu.vercel.app)
+
 ## 🖥️ Tampilan
 
 - **☀️ Siang:** Biru soft (#f0f2f5), card putih, aksen navy (#4a5580)
