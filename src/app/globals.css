@@ -1,39 +1,57 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f7f4f0;
-  --charcoal: #2d2a26;
-  --sage: #5a5a40;
-  --sage-light: #7a7a5a;
-  --sage-pale: #e8e6dc;
-  --warm-white: #faf8f5;
-  --border: #e2ddd6;
-  --muted: #8a8580;
-  --income: #2e7d32;
-  --expense: #c62828;
+  /* Light mode — soft blue */
+  --bg: #f0f2f5;
+  --bg-card: #ffffff;
+  --text: #1a1c2e;
+  --text-secondary: #6b7094;
+  --border: #e0e3eb;
+  --accent: #4a5580;
+  --accent-light: #6a78a8;
+  --accent-pale: #e2e6f0;
+  --income: #2d7d6a;
+  --expense: #b84a5a;
+  --header-bg: #f8f9fc;
+}
+
+.dark {
+  /* Dark mode — midnight blue */
+  --bg: #0f111a;
+  --bg-card: #1a1d2e;
+  --text: #e0e2ee;
+  --text-secondary: #8b90b0;
+  --border: #2c2f45;
+  --accent: #6a78a8;
+  --accent-light: #8a96c0;
+  --accent-pale: #252840;
+  --income: #3da88a;
+  --expense: #d46a7a;
+  --header-bg: #131524;
 }
 
 @theme inline {
-  --color-cream: var(--cream);
-  --color-charcoal: var(--charcoal);
-  --color-sage: var(--sage);
-  --color-sage-light: var(--sage-light);
-  --color-sage-pale: var(--sage-pale);
-  --color-warm-white: var(--warm-white);
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
   --color-border: var(--border);
-  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-pale: var(--accent-pale);
   --color-income: var(--income);
   --color-expense: var(--expense);
+  --color-header-bg: var(--header-bg);
   --font-sans: "Inter", var(--font-geist-sans);
   --font-mono: "Fira Code", var(--font-geist-mono);
 }
 
 body {
-  background: var(--cream);
-  color: var(--charcoal);
+  background: var(--bg);
+  color: var(--text);
   font-family: "Inter", var(--font-geist-sans);
 }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #d4cfc8; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #8b90b0; border-radius: 3px; }
