@@ -176,7 +176,7 @@ export default function Home() {
               <BarChart data={dailyData}>
                 <XAxis dataKey="tanggal" tick={{ fontSize: 10, fill: gelap ? '#9c9790' : '#78716c' }} tickFormatter={(v: any) => v.slice(8)} />
                 <YAxis tick={{ fontSize: 10, fill: gelap ? '#9c9790' : '#78716c' }} tickFormatter={(v: any) => (v / 1000).toFixed(0) + 'k'} />
-                <Tooltip formatter={(v: any) => formatRupiah(Number(v))} />
+                <Tooltip formatter={(v: any) => formatRupiah(Number(v))} contentStyle={{ background: 'transparent', border: 'none', boxShadow: 'none' }} />
                 <Bar dataKey="pengeluaran" fill="#6a78a8" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -192,7 +192,7 @@ export default function Home() {
                   <Pie data={chartData} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: any) => `${name} ${((percent || 0) * 100).toFixed(0)}%`} labelLine={false}>
                     {chartData.map((e: any, i: number) => <Cell key={i} fill={WARNA_KATEGORI[e.name] || '#b8b2a8'} />)}
                   </Pie>
-                  <Tooltip formatter={(v: any) => formatRupiah(Number(v))} />
+                  <Tooltip formatter={(v: any) => formatRupiah(Number(v))} contentStyle={{ background: 'transparent', border: 'none', boxShadow: 'none' }} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
